@@ -12,7 +12,11 @@ import LoginScreen from "./screens/auth/LoginScreen";
 import SignUpScreen from "./screens/auth/SignUpScreen";
 import UserProfile from "./screens/auth/UserProfile";
 
-const Stack = createNativeStackNavigator();
+// TODO NEXT UP:::: https://www.youtube.com/watch?v=drF8HbnW87w
+// const Stack = createNativeStackNavigator();
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 function SplashScreen() {
     return (
@@ -41,22 +45,20 @@ export default function App() {
     return <View style={{flex: 1}}>
         <NavigationContainer>
             {loggedIn === false ? (
-                <Stack.Navigator screenListeners={{
-                    state: (e) => {
-                        // Do something with the state
-                        console.log('state changed', e.data);
-                    },
-                }}>
-                    <Stack.Screen name="Login" component={LoginScreen}/>
-                    <Stack.Screen name="Signup" component={SignUpScreen}/>
-                </Stack.Navigator>
 
+                    <Tab.Navigator>
+                        <Tab.Screen name="Login" component={LoginScreen} />
+                        <Tab.Screen name="Signup" component={SignUpScreen} />
+                    </Tab.Navigator>
             ) : (
-                <Stack.Navigator>
-                    <Stack.Screen name="UserProfile" component={UserProfile}/>
-                </Stack.Navigator>
+                <Tab.Navigator>
+                    <Tab.Screen name="UserProfile" component={UserProfile}/>
+                </Tab.Navigator>
             )}
+
         </NavigationContainer>
+
+
     </View>;
 }
 const styles = StyleSheet.create({
